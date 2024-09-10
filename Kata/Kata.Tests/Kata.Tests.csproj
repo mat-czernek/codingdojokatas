@@ -33,6 +33,9 @@
       <None Update="TestData\Common\TextFileLoading\oneLineTextFile.txt">
         <CopyToOutputDirectory>Always</CopyToOutputDirectory>
       </None>
+      <None Update="TestData\Anagrams\wordlist_codingdojo_expected_20683_anagrams.txt">
+        <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+      </None>
     </ItemGroup>
 
 </Project>
