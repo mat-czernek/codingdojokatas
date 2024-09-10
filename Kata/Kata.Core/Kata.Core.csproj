@@ -6,4 +6,12 @@
         <Nullable>enable</Nullable>
     </PropertyGroup>
 
+    <ItemGroup>
+      <Folder Include="Anagrams\" />
+    </ItemGroup>
+
+    <ItemGroup>
+      <ProjectReference Include="..\Kata.Common\Kata.Common.csproj" />
+    </ItemGroup>
+
 </Project>

@@ -12,4 +12,27 @@
       <PackageReference Include="NUnit3TestAdapter" Version="4.6.0" />
     </ItemGroup>
 
+    <ItemGroup>
+      <Folder Include="TestData\Anagrams\" />
+    </ItemGroup>
+
+    <ItemGroup>
+      <ProjectReference Include="..\Kata.Core\Kata.Core.csproj" />
+    </ItemGroup>
+
+    <ItemGroup>
+      <None Update="TestData\Common\TextFileLoading\emptyTextFile.txt">
+        <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+      </None>
+      <None Update="TestData\Common\TextFileLoading\multipleLinesTextFile.txt">
+        <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+      </None>
+      <None Update="TestData\Common\TextFileLoading\multipleLinesWithEmptyOnes.txt">
+        <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+      </None>
+      <None Update="TestData\Common\TextFileLoading\oneLineTextFile.txt">
+        <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+      </None>
+    </ItemGroup>
+
 </Project>
