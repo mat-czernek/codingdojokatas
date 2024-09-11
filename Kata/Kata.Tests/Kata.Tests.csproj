@@ -35,6 +35,9 @@
       <None Update="TestData\Anagrams\small_sample.txt">
         <CopyToOutputDirectory>Always</CopyToOutputDirectory>
       </None>
+      <None Update="TestData\Common\Texts\sampleTextFileWithWordsInLines.txt">
+        <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+      </None>
     </ItemGroup>
 
 </Project>
