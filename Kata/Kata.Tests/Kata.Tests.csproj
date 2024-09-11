@@ -13,10 +13,6 @@
     </ItemGroup>
 
     <ItemGroup>
-      <Folder Include="TestData\Anagrams\" />
-    </ItemGroup>
-
-    <ItemGroup>
       <ProjectReference Include="..\Kata.Core\Kata.Core.csproj" />
     </ItemGroup>
 
@@ -34,6 +30,9 @@
         <CopyToOutputDirectory>Always</CopyToOutputDirectory>
       </None>
       <None Update="TestData\Anagrams\wordlist_codingdojo_expected_20683_anagrams.txt">
+        <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+      </None>
+      <None Update="TestData\Anagrams\small_sample.txt">
         <CopyToOutputDirectory>Always</CopyToOutputDirectory>
       </None>
     </ItemGroup>
