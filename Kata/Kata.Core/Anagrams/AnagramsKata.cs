@@ -1,5 +1,3 @@
-using System.Collections.ObjectModel;
-using System.Text.RegularExpressions;
 using Kata.Common.Files;
 using Kata.Common.Texts;
 
