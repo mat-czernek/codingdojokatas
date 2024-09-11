@@ -74,13 +74,19 @@ public class StringCharactersSortingPerformanceTests
     +------------------------+---------------------------------+
      */
     
+    [OneTimeSetUp]
+    public void BeforeTestsExecution()
+    {
+        FileHelper.DeleteWhenExists($"{nameof(SortingCharactersInString_WithLinq)}.txt".ToProjectDirectory());
+        FileHelper.DeleteWhenExists($"{nameof(SortingCharactersInString_WithArrayOfChar)}.txt".ToProjectDirectory());
+    }
+    
     [Ignore("Created out of curiosity to check performance with comparision to array of char sorting")]
     [Test]
     [Repeat(30)]
     public void SortingCharactersInString_WithLinq()
     {
         var resultOutputFile = $"{nameof(SortingCharactersInString_WithLinq)}.txt".ToProjectDirectory();
-        FileHelper.DeleteWhenExists(resultOutputFile);
         
         var filePathWithSample = @"TestData\Common\Texts\sampleTextFileWithWordsInLines.txt".ToProjectDirectory();
         var wordsFromFile = FileReader.ReadNonEmptyLines(filePathWithSample);
@@ -102,7 +108,6 @@ public class StringCharactersSortingPerformanceTests
     public void SortingCharactersInString_WithArrayOfChar()
     {
         var resultOutputFile = $"{nameof(SortingCharactersInString_WithArrayOfChar)}.txt".ToProjectDirectory();
-        FileHelper.DeleteWhenExists(resultOutputFile);
         
         var filePathWithSample = @"TestData\Common\Texts\sampleTextFileWithWordsInLines.txt".ToProjectDirectory();
         var wordsFromFile = FileReader.ReadNonEmptyLines(filePathWithSample);
