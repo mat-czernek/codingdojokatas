@@ -1,6 +1,7 @@
 using System.Collections.ObjectModel;
 using System.Text.RegularExpressions;
 using Kata.Common.Files;
+using Kata.Common.Texts;
 
 namespace Kata.Core.Anagrams;
 
@@ -14,24 +15,20 @@ public static class AnagramsKata
         if (string.IsNullOrEmpty(pathToFileWithWords))
             throw new ArgumentException("Value cannot be null or empty.", nameof(pathToFileWithWords));
         
-        var wordsWithAnagrams = new Dictionary<string, List<string>>();
         var wordsFromFile = FileReader.ReadNonEmptyLines(pathToFileWithWords);
-
         var anagramsCandidates = new Dictionary<string, List<string>>();
         
         foreach (var word in wordsFromFile)
         {
-            var wordAsArrayOfChar = word.ToCharArray();
-            Array.Sort(wordAsArrayOfChar);
+            var wordWithSortedCharactersAsGroupKey = word.SortCharactersWithArrayOfChar();
 
-            var anagramGroupKey = string.Concat(wordAsArrayOfChar);
-
-            if (anagramsCandidates.TryGetValue(anagramGroupKey, out var anagramGroupList))
+            if (anagramsCandidates.TryGetValue(wordWithSortedCharactersAsGroupKey, out var anagramGroupList))
                 anagramGroupList.Add(word);
             else
-                anagramsCandidates.Add(anagramGroupKey, [word]);
+                anagramsCandidates.Add(wordWithSortedCharactersAsGroupKey, [word]);
         }
         
+        var wordsWithAnagrams = new Dictionary<string, List<string>>();
         foreach (var group in anagramsCandidates)
         {
             if (group.Value.Count <= 1) continue;
