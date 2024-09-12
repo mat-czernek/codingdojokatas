@@ -12,4 +12,32 @@
       <PackageReference Include="NUnit3TestAdapter" Version="4.6.0" />
     </ItemGroup>
 
+    <ItemGroup>
+      <ProjectReference Include="..\Kata.Core\Kata.Core.csproj" />
+    </ItemGroup>
+
+    <ItemGroup>
+      <None Update="TestData\Common\TextFileLoading\emptyTextFile.txt">
+        <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+      </None>
+      <None Update="TestData\Common\TextFileLoading\multipleLinesTextFile.txt">
+        <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+      </None>
+      <None Update="TestData\Common\TextFileLoading\multipleLinesWithEmptyOnes.txt">
+        <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+      </None>
+      <None Update="TestData\Common\TextFileLoading\oneLineTextFile.txt">
+        <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+      </None>
+      <None Update="TestData\Anagrams\wordlist_codingdojo_expected_20683_anagrams.txt">
+        <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+      </None>
+      <None Update="TestData\Anagrams\small_sample.txt">
+        <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+      </None>
+      <None Update="TestData\Common\Texts\sampleTextFileWithWordsInLines.txt">
+        <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+      </None>
+    </ItemGroup>
+
 </Project>
