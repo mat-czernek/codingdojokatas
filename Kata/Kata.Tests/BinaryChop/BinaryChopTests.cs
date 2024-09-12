@@ -12,6 +12,14 @@ public class BinaryChopTests
         var foundItemOnIndex = BinaryChopKata.ChopIterative(numbers, target);
         Assert.That(foundItemOnIndex, Is.EqualTo(targetItemIndexInArray));
     }
+    
+    [Test]
+    [TestCaseSource(nameof(BinaryChop_Cases))]
+    public void BinaryChop_Recursive(int targetItemIndexInArray, int target, int[] numbers)
+    {
+        var foundItemOnIndex = BinaryChopKata.ChopRecursive(numbers, target);
+        Assert.That(foundItemOnIndex, Is.EqualTo(targetItemIndexInArray));
+    }
 
     public static IEnumerable<TestCaseData> BinaryChop_Cases()
     {
