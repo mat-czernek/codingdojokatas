@@ -2,7 +2,7 @@ namespace Kata.Core.BinaryChop;
 
 public static class BinaryChopKata
 {
-    public static int ChopIterative(int[] numbers, int target)
+    public static int FindFirstIndexIterative(int[] numbers, int target)
     {
         Array.Sort(numbers);
 
@@ -26,13 +26,13 @@ public static class BinaryChopKata
         return -1;
     }
     
-    public static int ChopRecursive(int[] numbers, int target)
+    public static int FindFirstIndexRecursive(int[] numbers, int target)
     {
         Array.Sort(numbers);
-        return ChopRecursiveInternal(numbers, target, 0, numbers.Length - 1);
+        return FindFirstIndexRecursiveInternal(numbers, target, 0, numbers.Length - 1);
     }
 
-    private static int ChopRecursiveInternal(int[] numbers, int target, int leftIndex, int rightIndex)
+    private static int FindFirstIndexRecursiveInternal(int[] numbers, int target, int leftIndex, int rightIndex)
     {
         if (leftIndex > rightIndex) return -1;
         
@@ -42,9 +42,9 @@ public static class BinaryChopKata
             return middleIndex;
 
         if (numbers[middleIndex] < target)
-            return ChopRecursiveInternal(numbers, target, middleIndex + 1, rightIndex);
+            return FindFirstIndexRecursiveInternal(numbers, target, middleIndex + 1, rightIndex);
 
-        return ChopRecursiveInternal(numbers, target, leftIndex, rightIndex - 1);
+        return FindFirstIndexRecursiveInternal(numbers, target, leftIndex, rightIndex - 1);
 
     }
 }

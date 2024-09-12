@@ -9,7 +9,7 @@ public class BinaryChopTests
     [TestCaseSource(nameof(BinaryChop_Cases))]
     public void BinaryChop_Iterative(int targetItemIndexInArray, int target, int[] numbers)
     {
-        var foundItemOnIndex = BinaryChopKata.ChopIterative(numbers, target);
+        var foundItemOnIndex = BinaryChopKata.FindFirstIndexIterative(numbers, target);
         Assert.That(foundItemOnIndex, Is.EqualTo(targetItemIndexInArray));
     }
     
@@ -17,7 +17,7 @@ public class BinaryChopTests
     [TestCaseSource(nameof(BinaryChop_Cases))]
     public void BinaryChop_Recursive(int targetItemIndexInArray, int target, int[] numbers)
     {
-        var foundItemOnIndex = BinaryChopKata.ChopRecursive(numbers, target);
+        var foundItemOnIndex = BinaryChopKata.FindFirstIndexRecursive(numbers, target);
         Assert.That(foundItemOnIndex, Is.EqualTo(targetItemIndexInArray));
     }
 
