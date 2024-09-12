@@ -8,6 +8,57 @@ namespace Kata.Tests.Common.Texts;
 
 public class StringCharactersSortingPerformanceTests
 {
+    [OneTimeSetUp]
+    public void BeforeTestsExecution()
+    {
+        FileHelper.DeleteWhenExists($"{nameof(SortingCharactersInString_WithLinq)}.txt".ToProjectDirectory());
+        FileHelper.DeleteWhenExists($"{nameof(SortingCharactersInString_WithArrayOfChar)}.txt".ToProjectDirectory());
+    }
+    
+    [Ignore("Created out of curiosity to check performance with comparision to array of char sorting")]
+    [Test]
+    [Repeat(30)]
+    public void SortingCharactersInString_WithLinq()
+    {
+        var resultOutputFile = $"{nameof(SortingCharactersInString_WithLinq)}.txt".ToProjectDirectory();
+        
+        var filePathWithSample = @"TestData\Common\Texts\sampleTextFileWithWordsInLines.txt".ToProjectDirectory();
+        var wordsFromFile = FileReader.ReadNonEmptyLines(filePathWithSample);
+
+        var stopwatch = new Stopwatch();
+        stopwatch.Start();
+        foreach (var word in wordsFromFile)
+        {
+            word.SortCharactersWithLinq();
+        }
+        stopwatch.Stop();
+        File.AppendAllText(resultOutputFile, $"{stopwatch.ElapsedMilliseconds}{Environment.NewLine}");
+        stopwatch.Reset();
+    }
+    
+    [Ignore("Created out of curiosity to check performance with comparision to LINQ sorting")]
+    [Test]
+    [Repeat(30)]
+    public void SortingCharactersInString_WithArrayOfChar()
+    {
+        var resultOutputFile = $"{nameof(SortingCharactersInString_WithArrayOfChar)}.txt".ToProjectDirectory();
+        
+        var filePathWithSample = @"TestData\Common\Texts\sampleTextFileWithWordsInLines.txt".ToProjectDirectory();
+        var wordsFromFile = FileReader.ReadNonEmptyLines(filePathWithSample);
+
+        var stopwatch = new Stopwatch();
+        stopwatch.Start();
+        foreach (var word in wordsFromFile)
+        {
+            word.SortCharactersWithArrayOfChar();
+        }
+        stopwatch.Stop();
+        File.AppendAllText(resultOutputFile, $"{stopwatch.ElapsedMilliseconds}{Environment.NewLine}");
+        stopwatch.Reset();
+    }
+}
+
+
     /*
     +------------------------+---------------------------------+
     | Sorting with LINQ [ms] | Sorting with array of char [ms] |
@@ -73,53 +124,3 @@ public class StringCharactersSortingPerformanceTests
     | 144                    | 85                              |
     +------------------------+---------------------------------+
      */
-    
-    [OneTimeSetUp]
-    public void BeforeTestsExecution()
-    {
-        FileHelper.DeleteWhenExists($"{nameof(SortingCharactersInString_WithLinq)}.txt".ToProjectDirectory());
-        FileHelper.DeleteWhenExists($"{nameof(SortingCharactersInString_WithArrayOfChar)}.txt".ToProjectDirectory());
-    }
-    
-    [Ignore("Created out of curiosity to check performance with comparision to array of char sorting")]
-    [Test]
-    [Repeat(30)]
-    public void SortingCharactersInString_WithLinq()
-    {
-        var resultOutputFile = $"{nameof(SortingCharactersInString_WithLinq)}.txt".ToProjectDirectory();
-        
-        var filePathWithSample = @"TestData\Common\Texts\sampleTextFileWithWordsInLines.txt".ToProjectDirectory();
-        var wordsFromFile = FileReader.ReadNonEmptyLines(filePathWithSample);
-
-        var stopwatch = new Stopwatch();
-        stopwatch.Start();
-        foreach (var word in wordsFromFile)
-        {
-            word.SortCharactersWithLinq();
-        }
-        stopwatch.Stop();
-        File.AppendAllText(resultOutputFile, $"{stopwatch.ElapsedMilliseconds}{Environment.NewLine}");
-        stopwatch.Reset();
-    }
-    
-    [Ignore("Created out of curiosity to check performance with comparision to LINQ sorting")]
-    [Test]
-    [Repeat(30)]
-    public void SortingCharactersInString_WithArrayOfChar()
-    {
-        var resultOutputFile = $"{nameof(SortingCharactersInString_WithArrayOfChar)}.txt".ToProjectDirectory();
-        
-        var filePathWithSample = @"TestData\Common\Texts\sampleTextFileWithWordsInLines.txt".ToProjectDirectory();
-        var wordsFromFile = FileReader.ReadNonEmptyLines(filePathWithSample);
-
-        var stopwatch = new Stopwatch();
-        stopwatch.Start();
-        foreach (var word in wordsFromFile)
-        {
-            word.SortCharactersWithArrayOfChar();
-        }
-        stopwatch.Stop();
-        File.AppendAllText(resultOutputFile, $"{stopwatch.ElapsedMilliseconds}{Environment.NewLine}");
-        stopwatch.Reset();
-    }
-}
