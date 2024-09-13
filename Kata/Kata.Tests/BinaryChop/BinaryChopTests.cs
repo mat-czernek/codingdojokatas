@@ -32,6 +32,15 @@ public class BinaryChopTests
         var foundItemOnIndex = BinaryChopKata.FindFirstIndexInterpolated(numbers, target);
         Assert.That(foundItemOnIndex, Is.EqualTo(targetItemIndexInArray));
     }
+    
+    [Test]
+    [TestCaseSource(nameof(BinaryChop_Cases))]
+    [TestCaseSource(nameof(BinaryChop_ChatGPT_SampleCases))]
+    public void BinaryChop_Parallel(int targetItemIndexInArray, int target, int[] numbers)
+    {
+        var foundItemOnIndex = BinaryChopKata.FindFirstIndexParallel(numbers, target);
+        Assert.That(foundItemOnIndex, Is.EqualTo(targetItemIndexInArray));
+    }
 
     public static IEnumerable<TestCaseData> BinaryChop_ChatGPT_SampleCases()
     {

@@ -78,4 +78,54 @@ public static class BinaryChopKata
         return leftIndex + ((target - numbers[leftIndex]) * (rightIndex - leftIndex)) /
             (numbers[rightIndex] - numbers[leftIndex]);
     }
+
+    public static int FindFirstIndexParallel(int[] numbers, int target)
+    {
+        if (numbers.Length == 0)
+            return -1;
+        
+        Array.Sort(numbers);
+
+        var result = -1;
+        var leftIndex = 0;
+        var rightIndex = numbers.Length - 1;
+
+        Parallel.Invoke(() =>
+        {
+            // Left side of array
+            var leftIndexLocal = leftIndex;
+            var rightIndexLocal = (leftIndex + rightIndex) / 2;
+
+            while (leftIndexLocal <= rightIndexLocal && result == -1)
+            {
+                var middle = (leftIndexLocal + rightIndexLocal) / 2;
+
+                if (numbers[middle] == target)
+                    result = middle;
+                else if (numbers[middle] < target)
+                    leftIndexLocal = middle + 1;
+                else
+                    rightIndexLocal = middle - 1;
+            }
+        }, () =>
+        {
+            // Right side of array
+            var leftIndexLocal = ((leftIndex + rightIndex) / 2) + 1;
+            var rightIndexLocal = rightIndex;
+
+            while (leftIndexLocal <= rightIndexLocal && result == -1)
+            {
+                var middle = (leftIndexLocal + rightIndexLocal) / 2;
+
+                if (numbers[middle] == target)
+                    result = middle;
+                else if (numbers[middle] < target)
+                    leftIndexLocal = middle + 1;
+                else
+                    rightIndexLocal = middle - 1;
+            }
+        });
+
+        return result;
+    }
 }
