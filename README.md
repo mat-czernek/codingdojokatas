@@ -14,4 +14,6 @@ Implement binary search algorithm. Try to apply 5 different approaches. I have m
 - interpolated
 - parallel
 
+Original description: http://codekata.com/kata/kata02-karate-chop/
+
 Next will be preparation of more representative portion of tests cases and run some performance checks for different approaches.
