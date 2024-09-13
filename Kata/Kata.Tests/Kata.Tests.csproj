@@ -41,6 +41,9 @@
       <None Update="TestData\BinaryChop\sample-chatGPT-generated-for-fun.txt">
         <CopyToOutputDirectory>Always</CopyToOutputDirectory>
       </None>
+      <None Update="TestData\BloomFilters\words.txt">
+        <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+      </None>
     </ItemGroup>
 
 </Project>
