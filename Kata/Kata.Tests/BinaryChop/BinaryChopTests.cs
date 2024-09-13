@@ -1,3 +1,4 @@
+using Kata.Common.Extensions;
 using Kata.Core.BinaryChop;
 using NUnit.Framework;
 
@@ -7,6 +8,7 @@ public class BinaryChopTests
 {
     [Test]
     [TestCaseSource(nameof(BinaryChop_Cases))]
+    [TestCaseSource(nameof(BinaryChop_ChatGPT_SampleCases))]
     public void BinaryChop_Iterative(int targetItemIndexInArray, int target, int[] numbers)
     {
         var foundItemOnIndex = BinaryChopKata.FindFirstIndexIterative(numbers, target);
@@ -15,10 +17,35 @@ public class BinaryChopTests
     
     [Test]
     [TestCaseSource(nameof(BinaryChop_Cases))]
+    [TestCaseSource(nameof(BinaryChop_ChatGPT_SampleCases))]
     public void BinaryChop_Recursive(int targetItemIndexInArray, int target, int[] numbers)
     {
         var foundItemOnIndex = BinaryChopKata.FindFirstIndexRecursive(numbers, target);
         Assert.That(foundItemOnIndex, Is.EqualTo(targetItemIndexInArray));
+    }
+    
+    [Test]
+    [TestCaseSource(nameof(BinaryChop_Cases))]
+    [TestCaseSource(nameof(BinaryChop_ChatGPT_SampleCases))]
+    public void BinaryChop_Interpolated(int targetItemIndexInArray, int target, int[] numbers)
+    {
+        var foundItemOnIndex = BinaryChopKata.FindFirstIndexInterpolated(numbers, target);
+        Assert.That(foundItemOnIndex, Is.EqualTo(targetItemIndexInArray));
+    }
+
+    public static IEnumerable<TestCaseData> BinaryChop_ChatGPT_SampleCases()
+    {
+        var filePathWithSample = @"TestData\BinaryChop\sample-chatGPT-generated-for-fun.txt".ToProjectDirectory();
+
+        foreach (var lineFromFile in File.ReadLines(filePathWithSample))
+        {
+            var lineSplit = lineFromFile.Split(";");
+            var expectedIndex = int.Parse(lineSplit[0]);
+            var targetNumber = int.Parse(lineSplit[1]);
+            var numbers = Array.ConvertAll(lineSplit[2].Split(","), int.Parse);
+
+            yield return new TestCaseData(expectedIndex, targetNumber, numbers);
+        }
     }
 
     public static IEnumerable<TestCaseData> BinaryChop_Cases()

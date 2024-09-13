@@ -45,6 +45,37 @@ public static class BinaryChopKata
             return FindFirstIndexRecursiveInternal(numbers, target, middleIndex + 1, rightIndex);
 
         return FindFirstIndexRecursiveInternal(numbers, target, leftIndex, rightIndex - 1);
+    }
 
+    public static int FindFirstIndexInterpolated(int[] numbers, int target)
+    {
+        Array.Sort(numbers);
+        
+        var leftIndex = 0;
+        var rightIndex = numbers.Length - 1;
+
+        while ((leftIndex <= rightIndex) && (target >= numbers[leftIndex]) && (target <= numbers[rightIndex]))
+        {
+            if (leftIndex == rightIndex)
+                return numbers[leftIndex] == target ? leftIndex : -1;
+            
+            var position = CalculateInterpolatedPosition(target, leftIndex, rightIndex, numbers);
+
+            if (numbers[position] == target)
+                return position;
+
+            if (numbers[position] < target)
+                leftIndex = position + 1;
+            else
+                rightIndex = position - 1;
+        }
+
+        return -1;
+    }
+
+    private static int CalculateInterpolatedPosition(int target, int leftIndex, int rightIndex, int[] numbers)
+    {
+        return leftIndex + ((target - numbers[leftIndex]) * (rightIndex - leftIndex)) /
+            (numbers[rightIndex] - numbers[leftIndex]);
     }
 }
