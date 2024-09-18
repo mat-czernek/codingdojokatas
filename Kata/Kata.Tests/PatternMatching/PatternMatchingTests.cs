@@ -53,12 +53,14 @@ public class PatternMatchingTests
         yield return new TestCaseData("someFile-23-name-for-more-12-Complex-pattern.txt", "startsWith(\"some\") and contains(\"55\") and (not endsWith(\"exe\"))", false);
         yield return new TestCaseData("someFile-23-name-for-more-12-Complex-pattern.txt", "startsWith(\"some\") and endsWith(\"txt\") and (not contains(\"test\") and not contains(\"otherText\") )", true);
         yield return new TestCaseData("someFile-23-name-for-more-12-Complex-pattern.txt", "startsWith(\"s\") and startsWith(\"q\")", false);
-        yield return new TestCaseData("someFile-23-name-for-more-12-Complex-pattern.txt", "    startsWith(\"some\")  and         endsWith(\"txt\") and     (not     contains(\"test\") and            not contains(\"otherText\") )       ", true);
         yield return new TestCaseData("someFile-23-name-for-more-12-Complex-pattern.txt", "startsWith(\"s\") and not contains(\"version\") and not contains(\"parent\") and (contains(\"umbrella\") or contains(\"car\"))", false);
         yield return new TestCaseData("someFile-23-name-for-more-12-Complex-pattern.txt", "startsWith(\"s\") or not contains(\"version\") or not contains(\"parent\") or (contains(\"pattern\") or contains(\"car\"))", true);
+        yield return new TestCaseData("someFile-23-name-for-more-12-Complex-pattern.txt", "(startsWith(\"s\") or not contains(\"version\") or not contains(\"parent\") or (contains(\"pattern\") or contains(\"car\"))) and contains(\"bubble\")", false);
         yield return new TestCaseData("someFile-23-name-for-more-12-Complex-pattern.txt", "startsWith(\"s\") and (not contains(\"version\") or contains(\"pattern\"))", true);
         yield return new TestCaseData("someFile-23-name-for-more-12-Complex-pattern.txt", "startsWith(\"som\") and contains(\"more\") and (not contains(\"2024\") and not contains(\"contract\"))", true);
         yield return new TestCaseData("someFile-23-name-for-more-12-Complex-pattern.txt", "startsWith(\"xyz\") and endsWith(\"zip\") and contains(\"zebra\") or (startsWith(\"abc\") or startsWith(\"xyz\"))", false);
+        
+        yield return new TestCaseData("someFile-23-name-for-more-12-Complex-pattern.txt", "    startsWith(\"some\")  and         endsWith(\"txt\") and     (not     contains(\"test\") and            not contains(\"otherText\") )       ", true);
         
         yield return new TestCaseData("sample-file_name-12345.txt", "((((contains(\"someText\"))) or ((contains(\"123\")))))", true);
         yield return new TestCaseData("sample-file_name-12345.txt", "((((contains(\"someText\"))) or ((contains(\"123\"))))) or ((((contains(\"someText\"))) or ((contains(\"123\")))))", true);
